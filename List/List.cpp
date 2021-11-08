@@ -1,21 +1,21 @@
 ﻿#include <forward_list>
+#include <iostream>
 #include "DoubleLinkedList.h"
-#include <iostream>​
-#include <list>
 #include "SingleLinkedList.h"
+#include "CircularSingleLinkedList.h"
 
 using namespace std;
 
 
 int main()
 {
-	list<int> list;
+	DoubleLinkedList<float> lst;
 
-	list.push_back(4);
-	list.push_back(5);
-	list.push_front(2);
+	lst.push_back(4.5f);
+	lst.push_back(5.2f);
+	lst.push_front(2.4f);
 
-	for (auto iter = list.begin(); iter != list.end(); ++iter)
+	for (auto iter = lst.begin(); iter != lst.end(); ++iter)
 	{
 		cout << *iter << " ";
 	}

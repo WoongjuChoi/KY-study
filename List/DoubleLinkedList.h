@@ -1,26 +1,25 @@
 #pragma once
 
 #include <cstddef>
-
-
+#include <utility>
 
 template<typename T>
 class DoubleLinkedList
 {
-public:
     struct Node
     {
-        Node(int data = 0, Node* prev = nullptr, Node* next = nullptr)
+        Node() = default;
+        Node(const T& data, Node* prev = nullptr, Node* next = nullptr)
             : Data{ data }, Prev{ prev }, Next{ next } {}
         Node(const Node&) = delete;
         Node& operator=(const Node&) = delete;
         ~Node() = default;
 
-        int     Data;
+        T     Data;
         Node* Next;
         Node* Prev;
     };
-    
+
 public:
     class const_iterator
     {
@@ -28,6 +27,7 @@ public:
         const_iterator(Node* p = nullptr)
             : _p{ p } { }
         ~const_iterator() { _p = nullptr; }
+
         const T& operator*() const { return _p->Data; }
         const T* operator->() const { return &_p->Data; }
         const_iterator& operator++() { _p = _p->Next; return *this; }
@@ -48,6 +48,7 @@ public:
         {
             return _p == rhs._p;
         }
+    public:
         bool                operator!=(const const_iterator& rhs) const
         {
             return !(*this == rhs);
@@ -62,13 +63,14 @@ public:
             return _p != nullptr;
         }
             
-    public:
         Node* _p = nullptr;
     };
-    class iterator : const_iterator
+
+    class iterator : public const_iterator
     {
     public:
         using const_iterator::const_iterator;
+
         T& operator*() const
         {
             return const_cast<T&>(const_iterator::operator*());
@@ -101,12 +103,12 @@ public:
         }
     };
 
-    void swap(T& a, T& b) noexcept
+   /* void swap(T& a, T& b) noexcept
     {
         T temp = a;
         a = b;
         b = temp;
-    }
+    }*/
 
     // 기본 생성자
     DoubleLinkedList() = default;
@@ -117,7 +119,7 @@ public:
     {
         for (size_t i = 0; i < count; ++i)
         {
-            push_front(0);
+            push_front({});
         }
     }
 
@@ -131,9 +133,9 @@ public:
             inserted = insert(inserted, iter->Data);
         }*/
 
-        for (auto iter = other.begin(); iter != other.end(); iter = iter->Next)
+        for (auto iter = other.begin(); iter != other.end(); ++iter)
         {
-            push_back(iter->Data);
+            push_back(*iter);
         }
     }
 
@@ -143,9 +145,9 @@ public:
         if (this != &rhs)
         {
             DoubleLinkedList temp(rhs);
-            swap(_end, temp._end);
-            swap(_head, temp._head);
-            swap(_size, temp._size);
+            std::swap(_end, temp._end);
+            std::swap(_head, temp._head);
+            std::swap(_size, temp._size);
         }
 
         return *this;
@@ -155,15 +157,20 @@ public:
     ~DoubleLinkedList()
     {
         clear();
+
+        delete _end;
+        _end = nullptr;
+        _head = nullptr;
+        _size = 0;
     }
 
     // 첫 번째 요소를 반환한다.
-    int& front() { return *begin(); }
-    const int& front() const { return *begin(); }
+    T& front() { return *begin(); }
+    const T& front() const { return *begin(); }
 
     // 마지막 요소를 반환한다.
-    int& back() { return *(--end()); }
-    const int& back() const { return *(--end()); }
+    T& back() { return *(--end()); }
+    const T& back() const { return *(--end()); }
 
     // 시작 요소를 가리키는 반복자를 반환한다.
     // 리스트가 비어있다면 end()와 같다.
@@ -176,7 +183,7 @@ public:
 
     // pos 이전에 value를 삽입한다.
     // 삽입된 요소를 가리키는 반복자를 반환한다.
-    iterator insert(iterator pos, int value)
+    iterator insert(iterator pos, const T& value)
     {
         Node* where = pos._p;
         Node* newNode = new Node(value);
@@ -238,16 +245,16 @@ public:
     }
 
     // 시작에 value를 삽입한다.
-    void            push_front(int value) { insert(begin(), value); }
+    void            push_front(const T& value) { insert(begin(), value); }
 
     // 끝에 value를 삽입한다.
-    void            push_back(int value) { insert(end(), value); }
+    void            push_back(const T& value) { insert(end(), value); }
 
     // 시작 요소를 제거한다.
     void            pop_front() { erase(begin()); }
 
     // 끝 요소를 제거한다.
-    void            pop_back() { erase(end()->Prev); }
+    void            pop_back() { erase(--end()); }
 
     // 컨테이너가 비었는지 판단한다.
     bool            empty() const { return _size == 0; }
@@ -267,7 +274,7 @@ public:
 
 
     // 해당 value가 있는지 체크한다.
-    bool            contains(int value) const
+    bool            contains(const T& value) const
     {
         for (auto iter = begin(); iter != end(); ++iter)
         {
