@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{fa0cdfcf-c54f-45ff-ab2b-cdf8fef24b5c}</ProjectGuid>
-    <RootNamespace>CircularSingleLinkedList</RootNamespace>
+    <ProjectGuid>{4f06de5f-96e3-4eee-a21d-453790f78041}</ProjectGuid>
+    <RootNamespace>KeyLoger</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -139,10 +139,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="CircularSingleLinkedList.h" />
+    <ClCompile Include="KeyLoger.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
