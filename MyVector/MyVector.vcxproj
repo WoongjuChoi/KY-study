@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{6ef7286b-14bd-4383-84c2-da0898694980}</ProjectGuid>
-    <RootNamespace>List</RootNamespace>
+    <ProjectGuid>{added5fa-a281-43b0-807e-e6bd8a7ca997}</ProjectGuid>
+    <RootNamespace>MyVector</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -139,12 +139,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="List.cpp" />
+    <ClInclude Include="MyStack.h" />
+    <ClInclude Include="MyVector.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="DoubleLinkedList.h" />
-    <ClInclude Include="MyStack2.h" />
-    <ClInclude Include="SingleLinkedList.h" />
+    <ClCompile Include="MyVector.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

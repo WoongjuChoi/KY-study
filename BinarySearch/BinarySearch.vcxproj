@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{6ef7286b-14bd-4383-84c2-da0898694980}</ProjectGuid>
-    <RootNamespace>List</RootNamespace>
+    <ProjectGuid>{5fa74b5a-1c4e-4213-9573-7f1636e3c9a3}</ProjectGuid>
+    <RootNamespace>BinarySearch</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -139,12 +139,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="List.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="DoubleLinkedList.h" />
-    <ClInclude Include="MyStack2.h" />
-    <ClInclude Include="SingleLinkedList.h" />
+    <ClCompile Include="BinarySearch.cpp" />
+    <ClCompile Include="수찾기.cpp" />
+    <ClCompile Include="숫자카드.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
